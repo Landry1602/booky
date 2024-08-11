@@ -7,3 +7,11 @@ CREATE TABLE user (
   hashedPassword VARCHAR(64) NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb3;
 
+DROP TABLE IF EXISTS favorite;
+
+CREATE TABLE favorite (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL, 
+    isbn VARCHAR(13) NOT NULL, 
+    UNIQUE(user_id, isbn)
+);

@@ -24,20 +24,32 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const validateToken = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+  const authHeader = req.headers['authorization'];
+  console.log('Authorization Header:', authHeader);
 
-    console.log('Authorization Header:', authHeader);
-    console.log('Extracted Token:', token);
+  if (!authHeader) {
+      console.log('No Authorization Header');
+      return res.sendStatus(401); // Unauthorized
+  }
 
-    if (token == null) return res.sendStatus(401);
+  // Split and extract the token
+  const token = authHeader.split(' ')[1];
+  console.log('Extracted Token:', token);
 
-    jwt.verify(token, JWT_SECRET, (err, user) => {
-        if (err) return res.sendStatus(403);
-        req.user = user;
-        console.log('Decoded User:', user);
-        next();
-    });
+  if (!token) {
+      console.log('No Token Provided');
+      return res.sendStatus(401); // Unauthorized
+  }
+
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+      if (err) {
+          console.error('Token verification failed:', err);
+          return res.sendStatus(401); // Unauthorized
+      }
+      req.user = user; // Attach user to request
+      console.log('Decoded User:', user);
+      next();
+  });
 };
 
 module.exports = {
