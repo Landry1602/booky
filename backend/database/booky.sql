@@ -15,3 +15,12 @@ CREATE TABLE favorite (
     isbn VARCHAR(13) NOT NULL, 
     UNIQUE(user_id, isbn)
 );
+
+DROP TABLE IF EXISTS collection;
+
+CREATE TABLE collection (
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL, 
+    isbn VARCHAR(13) NOT NULL, 
+    UNIQUE(user_id)
+);

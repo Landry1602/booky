@@ -8,6 +8,7 @@ const { loginController } = require("./controllers/loginController");
 
 const userController = require("../src/controllers/userController");
 const favoriteController = require("../src/controllers/favoriteController");
+const collectionController = require("../src/controllers/collectionController");
 
 const database = require("../database/database");
 
@@ -31,5 +32,8 @@ app.delete('/api/users/:id', userController.deleteUser);
 
 app.post('/api/favorites', favoriteController.addFavorite);
 app.get('/api/favorite', favoriteController.getFavorites);
+
+app.post('/api/collection', collectionController.addCollection);
+app.get('/api/collection', collectionController.getCollection);
 
 module.exports = app;
