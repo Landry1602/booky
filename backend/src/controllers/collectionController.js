@@ -20,8 +20,8 @@ const getCollection = async (req, res) => {
     const userId = req.user.id;
 
     try {
-        const [favorites] = await database.query(
-            "SELECT isbn FROM favorites WHERE user_id = ?",
+        const [collection] = await database.query(
+            "SELECT isbn FROM collection WHERE user_id = ?",
             [userId]
         );
 
