@@ -1,0 +1,44 @@
+.results-flex {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap onto new rows */
+    gap: 16px;
+    padding: 16px;
+}
+
+.book-item {
+    flex: 1 1 calc(25% - 32px); /* Responsive flex basis with gap consideration */
+    max-width: calc(25% - 32px);
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+@media (max-width: 768px) {
+    .book-item {
+        flex: 1 1 calc(50% - 32px); /* Two items per row on smaller screens */
+        max-width: calc(50% - 32px);
+    }
+}
+
+@media (max-width: 480px) {
+    .book-item {
+        flex: 1 1 100%; /* Full width on very small screens */
+        max-width: 100%;
+    }
+}
+
+.book-item:hover {
+    transform: scale(1.05);
+}
+
+.book-item h3 {
+    margin: 0 0 8px;
+}
+
+.book-item p {
+    margin: 0;
+    color: #555;
+}
